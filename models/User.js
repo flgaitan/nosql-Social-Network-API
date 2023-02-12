@@ -7,13 +7,14 @@ const userSchema = new Schema(
             type: String,
             unique: true,
             required: true,
-            trimm: true
+            trim: true
         },
         email: {
             type: String,
             unique: true,
             required: true,
-            match: /.+\@.+\..+/,
+            match: [/.+\@.+\..+/, "invalid email input"]
+
         },
         thoughts: [
             {
@@ -33,6 +34,7 @@ const userSchema = new Schema(
         // Here we are indicating that we want virtuals to be included with our response, overriding the default behavior
         toJSON: {
             virtuals: true,
+            getters: true
         },
         id: false,
     }
@@ -54,5 +56,9 @@ const userSchema = new Schema(
 
 // Initialize our User model
 const User = model('User', userSchema);
+
+userSchema.virtual('friendCount').get(function(){
+    return this.friends.length
+})
 
 module.exports = User;
