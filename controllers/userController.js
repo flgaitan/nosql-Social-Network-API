@@ -1,13 +1,13 @@
 const { User, Thought } = require('../models');
 
 module.exports = {
-  // Get all courses
+  // Get all users
   getUsers(req, res) {
     User.find()
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
-  // Get a course
+  // Get a single user
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
@@ -20,7 +20,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Create a course
+  // Create a user post
   //post
   createUser(req, res) {
     User.create(req.body)
@@ -31,8 +31,8 @@ module.exports = {
       });
   },
 
-  // Update a course
-  updateCourse(req, res) {
+  // Update an user
+  updateUser(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
       { username: req.body.username,
@@ -46,8 +46,8 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Delete a course
-  deleteCourse(req, res) {
+  // Delete a user
+  deleteUser(req, res) {
     User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
         !user
@@ -57,7 +57,7 @@ module.exports = {
       .then(() => res.json({ message: 'User and thoughts are deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
- // Adds a tag to an application. This method is unique in that we add the entire body of Friend rather than the ID with the mongodb $addToSet operator.
+ // Adds a tag to a user. This method is unique in that we add the entire body of Friend rather than the ID with the mongodb $addToSet operator.
  // //pass (params, res) and/or {params}
  addFriend(req, res) {
     User.findOneAndUpdate(
