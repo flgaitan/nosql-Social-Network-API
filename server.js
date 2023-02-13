@@ -13,14 +13,14 @@ connect(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
-  console.log('DB CONNECTION SUCESSFUL')
+  console.log('Db CONNECTION SUCESSFUL 🎉')
 }).catch((err) => {
-  console.log(err)
-})
+  console.log(err);
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on PORT 3001`);
-})
+});
 
 
