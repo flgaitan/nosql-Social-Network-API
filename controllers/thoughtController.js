@@ -78,34 +78,68 @@ module.exports = {
     //   )
 
   },
+
+ // Add an assignment to a student
+ addReaction(req, res) {
+  console.log('You are adding a reaction');
+  console.log(req.body);
+  Thought.findOneAndUpdate(
+    { _id: req.params.thoughtId },
+    { $addToSet: { reactions: req.body } },
+    { runValidators: true, new: true }
+  )
+    .then((thought) =>
+      !thought
+        ? res
+            .status(404)
+            .json({ message: 'No thought found with that ID :(' })
+        : res.json(thought)
+    )
+    .catch((err) => res.status(500).json(err));
+},
+// Remove assignment from a student
+removeReaction(req, res) {
+  Thought.findOneAndUpdate(
+    { _id: req.params.thoughtId },
+    { $pull: { reactions: { reactionId: req.params.reactionId } } },
+    { runValidators: true, new: true }
+  )
+    .then((thought) =>
+      !thought
+        ? res
+            .status(404)
+            .json({ message: 'No thought found with that ID :(' })
+        : res.json(thought)
+    )
+    .catch((err) => res.status(500).json(err));
+},
+
   // Adds a tag to an application. This method is unique in that we add the entire body of the tag rather than the ID with the mongodb $addToSet operator.
-  addReaction(req, res) {
-    Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
-      { $push: { reactions: { reactionId: req.params.reactionId } } },
-      // { $push: { reactions: req.body } },
-      { runValidators: true, new: true }
-    )
-      .then((thought) =>
-        !thought
-          ? res.status(404).json({ message: 'No reaction thought with this id!' })
-          : res.json(thought)
-      )
-      .catch((err) => res.status(500).json(err));
-  },
-  // Remove application tag. This method finds the application based on ID. It then updates the tags array associated with the app in question by removing it's tagId from the tags array.
-  //{params, res}
-  removeReaction(req, res) {
-    Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
-      { $pull: { reactions: { reactionId: req.params.reactionId } } },
-      { new: true }
-    )
-      .then((thought) =>
-        !thought
-          ? res.status(404).json({ message: 'No reaction thought with this id!' })
-          : res.json(thought)
-      )
-      .catch((err) => res.status(500).json(err));
-  },
+  // addReaction(req, res) {
+  //   Thought.findOneAndUpdate(
+  //     { _id: req.params.thoughtId },
+  //     { $push: { reactions: req.params.reactionId } },
+  //     // { $push: { reactions: req.body } },
+  //     { runValidators: true, new: true })
+  //     .then((thought) =>
+  //       !thought
+  //         ? res.status(404).json({ message: 'No reaction thought with this id!' })
+  //         : res.json(thought)
+  //     )
+  //     .catch((err) => res.status(500).json(err));
+  // },
+  // // Remove application tag. This method finds the application based on ID. It then updates the tags array associated with the app in question by removing it's tagId from the tags array.
+  // //{params, res}
+  // removeReaction(req, res) {
+  //   Thought.findOneAndUpdate(
+  //     { _id: req.params.thoughtId },
+  //     { $pull: { reactions:req.params.reactionId } },
+  //     { new: true })
+  //     .then((thought) =>
+  //       !thought
+  //         ? res.status(404).json({ message: 'No reaction thought with this id!' })
+  //         : res.json(thought)
+  //     )
+  //     .catch((err) => res.status(500).json(err));
+  // },
 };
