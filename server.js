@@ -1,26 +1,18 @@
 const express = require('express');
-const { connect, connection } = require('mongoose');
+const db = require('./config/connection');
+const routes = require('./routes');
 
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-const connectionString =
-  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/socialnetworkAPI';
-
-connect(connectionString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log('Db CONNECTION SUCESSFUL 🎉')
-}).catch((err) => {
-  console.log(err);
-});
+const cwd = process.cwd();
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on PORT 3001`);
+const app = express();
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(routes);
+
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`API server running on ${PORT}!🎉`);
+  });
 });
-
-
