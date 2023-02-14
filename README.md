@@ -1,151 +1,54 @@
-# nosql-Social-Network-API
-Your Challenge is to build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. You’ll use Express.js for routing, a MongoDB database, and the Mongoose ODM.
+# <nosql-Social-Network-API>
 
-https://github.com/flgaitan/nosql-Social-Network-API
+## Description
+
+This week's challenge is to build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. You’ll use Express.js for routing, a MongoDB database, and the Mongoose ODM.
+
+- The motivation this week was working with MongoDb and successfully create a document.
+
+- The project was built to be able to create a document thorugh MongoDb utilizing Mongoose ODM that contains a User model and a Thought model and both files have routes to get all, single user by its `_id` and populated thought and friend data, a single thought by its `_id`, create a user+thought, update an user + thought, and delete a user (and friend) + thought (and reaction).
+
+- The problem we are trying to solve is to successfully navigate mongodb to not only create sucessful documents, but sucessful routes and make sure we can access the data we are trying to fetch.
+
+- I learned that I really enjoy working with MongoDb, the data is more readable and although complex, it can be easier to work with than previous databases. I paid close attention to the information in each file as I was trying to seed the data and information and I was able to refer back to previous material to organize my data and seed the document. I was happy to see that I was able to accomplish my goal and try out my routes. The same approach was applied to trying out the routes, taking the time out to examine what was not working, and knowing where the mistake could be located was a big step in the right direction for me.
+
+## Table of Contents (Optional)
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+
+## Installation
+- Go to github and clone the repository to your device of choice.
+- Once cloned, make sure the packages are in order. We are using mongo, mongoose and Express for this project.
+- Perform a npm install to make sure everything is up to date.
+- Run the Server with node server.js
+- This projects utilizes both MongoDb and Insomnia to test out routes. Insomnia is optional, but optimal if you are just focused on the success of the routes.
+
+## Usage
+
+Provide instructions and examples for use. Include screenshots as needed.
+
+To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
+
+![alt text](assets/images/screenshot.png)
+
+## Credits
 
 
 
+## License
 
-**Schema Settings**:
-
-This will not be a model, but rather will be used as the `reaction` field's subdocument schema in the `Thought` model.
-
-### API Routes
-
-**`/api/users`**
-
-* `GET` all users
-
-* `GET` a single user by its `_id` and populated thought and friend data
-
-* `POST` a new user:
-
-```json
-// example data
-{
-  "username": "lernantino",
-  "email": "lernantino@gmail.com"
-}
-```
-
-* `PUT` to update a user by its `_id`
-
-* `DELETE` to remove user by its `_id`
-
-**BONUS**: Remove a user's associated thoughts when deleted.
-
----
-
-**`/api/users/:userId/friends/:friendId`**
-
-* `POST` to add a new friend to a user's friend list
-
-* `DELETE` to remove a friend from a user's friend list
-
----
-
-**`/api/thoughts`**
-
-* `GET` to get all thoughts
-
-* `GET` to get a single thought by its `_id`
-
-* `POST` to create a new thought (don't forget to push the created thought's `_id` to the associated user's `thoughts` array field)
-
-```json
-// example data
-{
-  "thoughtText": "Here's a cool thought...",
-  "username": "lernantino",
-  "userId": "5edff358a0fcb779aa7b118b"
-}
-```
-
-* `PUT` to update a thought by its `_id`
-
-* `DELETE` to remove a thought by its `_id`
+MIT License 
 
 ---
 
-**`/api/thoughts/:thoughtId/reactions`**
+🏆 
 
-* `POST` to create a reaction stored in a single thought's `reactions` array field
+## Features
+There are no current features associated with this app.
 
-* `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
+## Tests
+You can see a video submisson link with a tutorial of how this application's routes work.
 
-## Grading Requirements
-
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
-
-This Challenge is graded based on the following criteria:
-
-### Deliverables: 10%
-
-* Your GitHub repository containing your application code.
-
-### Walkthrough Video: 37%
-
-* A walkthrough video that demonstrates the functionality of the social media API must be submitted, and a link to the video should be included in your README file.
-
-  * The walkthrough video must show all of the technical acceptance criteria being met.
-
-  * The walkthrough video must demonstrate how to start the application’s server.
-
-  * The walkthrough video must demonstrate GET routes for all users and all thoughts being tested in Insomnia.
-
-  * The walkthrough video must demonstrate GET routes for a single user and a single thought being tested in Insomnia.
-
-  * The walkthrough video must demonstrate POST, PUT, and DELETE routes for users and thoughts being tested in Insomnia.
-
-  * Walkthrough video must demonstrate POST and DELETE routes for a user’s friend list being tested in Insomnia.
-
-  * Walkthrough video must demonstrate POST and DELETE routes for reactions to thoughts being tested in Insomnia.
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the preceding acceptance criteria plus the following:
-
-  * Uses the [Mongoose package](https://www.npmjs.com/package/mongoose) to connect to a MongoDB database.
-
-  * Includes User and Thought models outlined in the Challenge instructions.
-
-  * Includes schema settings for User and Thought models as outlined in the Challenge instructions.
-
-  * Includes Reactions as the `reaction` field's subdocument schema in the Thought model.
-
-  * Uses functionality to format queried timestamps properly.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains a high-quality README with description and a link to a walkthrough video.
-
-### Bonus: +10 Points
-
-* Application deletes a user's associated thoughts when the user is deleted.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* A walkthrough video demonstrating the functionality of the application and all of the acceptance criteria being met.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
----
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
