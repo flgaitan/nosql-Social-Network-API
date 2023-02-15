@@ -28,14 +28,21 @@ This week's challenge is to build an API for a social network web application wh
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+GITHUB REPO:
+https://github.com/flgaitan/nosql-Social-Network-API
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
 
-![alt text](assets/images/screenshot.png)
+VIDEO SUBMISSION LINK:
+PART I:
+https://drive.google.com/file/d/1R9msfxQsnloDWObUOCCsyWQjDkpHJItW/view
 
-## Credits
 
+PART II:
+https://drive.google.com/file/d/1hhWcE-qy7wJw838D8fdM5rTGVidMr7yu/view
+
+
+![alt text](assets/nosql-socialnetworkapi-users.png)
+![alt text](assets/nosql-socialnetworkapi-thoughts.png)
 
 
 ## License
