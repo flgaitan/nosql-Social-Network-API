@@ -79,7 +79,7 @@ module.exports = {
 
   },
 
- // Add an assignment to a student
+ // Add a reaction to a thought
  addReaction(req, res) {
   console.log('You are adding a reaction');
   console.log(req.body);
@@ -93,27 +93,26 @@ module.exports = {
       !thought
         ? res
             .status(404)
-            .json({ message: 'No thought found with that ID :(' })
+            .json({ message: 'No thought found with that ID, no reaction added :(' })
         : res.json(thought)
     )
     .catch((err) => res.status(500).json(err));
-},
-// Remove assignment from a student
+  },
+// Remove reaction from a thought
 removeReaction(req, res) {
-  Thought.findOneAndUpdate(
+  Thought.deleteOne(
     { _id: req.params.thoughtId },
-    { $pull: { reactions: { reactionId: req.params.reactionId } } },
-    { runValidators: true, new: true }
-  )
+    // { $pull: { reactions: req.params.reactionId } },
+    // { $pull: { reactions: { reactionId: req.params.reactionId } } },
+    // { new: true }
+    )
     .then((thought) =>
       !thought
-        ? res
-            .status(404)
-            .json({ message: 'No thought found with that ID :(' })
+        ? res.status(404).json({ message: 'No reaction found with that ID, try again :(' })
         : res.json(thought)
-    )
-    .catch((err) => res.status(500).json(err));
-},
+        )
+        .catch((err) => res.status(500).json(err));
+      },
 
   // Adds a tag to an application. This method is unique in that we add the entire body of the tag rather than the ID with the mongodb $addToSet operator.
   // addReaction(req, res) {
